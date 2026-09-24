@@ -1,4 +1,4 @@
-/** 干净线稿插画：黑线勾轮廓，线有粗细，只上一层淡彩，白底。 */
+/** 干净线稿插画：黑线勾轮廓，线有粗细，分区淡彩平涂，肤色自然，白底。 */
 
 import type { LineIllustration } from "./types.ts";
 
@@ -10,13 +10,16 @@ export const lineIllustration: LineIllustration = {
   crop: "head-and-shoulders",
   headroom: "10-15% above the hair",
   safeZone: "eyes and mouth stay readable; leave open white space on the side the face turns toward",
-  defaultExpression: "looking at the camera, calm closed mouth",
+  defaultExpression: "looking at the camera, relaxed friendly smile",
   styleSuffix: [
     "square head-and-shoulders crop",
     "black contour lines with varied weight",
     "thicker outer silhouette",
     "thinner interior lines for facial features, hair, and clothing",
-    "one single flat muted color wash over the ink",
+    "flat muted color fills kept separate by area",
+    "natural warm skin tone matching the reference photo on face, neck, and hands",
+    "hair and clothing keep their own colors from the reference photo",
+    "limited soft palette",
     "not a photograph",
     "generous blank white background",
     "no scenery",
@@ -38,5 +41,9 @@ export const lineIllustration: LineIllustration = {
     "straight-on passport crop",
     "face pinned to the center",
     "full profile",
+    "single color wash over everything",
+    "clothing color on skin",
+    "green or grey skin",
+    "stiff expression",
   ],
 };

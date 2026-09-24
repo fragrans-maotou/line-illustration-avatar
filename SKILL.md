@@ -2,7 +2,7 @@
 name: avatar-generator
 description: >-
   根据用户上传的参考图生成正方形干净线稿插画头像：黑线勾轮廓，线有粗细，
-  只上一层淡彩或平涂，微侧角度，背景留白。
+  分区淡彩平涂、肤色自然，微侧角度，背景留白。
   在用户要求头像、线稿、插画头像、微信头像、profile picture，
   或附上照片要做成头像时使用。没有参考图就先请用户上传。
   用 TypeScript 核对参考图并输出生图方案，再调用生图。
@@ -10,9 +10,17 @@ description: >-
 
 # 干净线稿插画头像
 
-只做这一种风格。黑线勾轮廓，外轮廓更粗，五官和衣服用细线，只上一层淡彩或平涂。背景留白。不是写实照片，也不是 Q 版大头。
+只做这一种风格。黑线勾轮廓，外轮廓更粗，五官和衣服用细线。上色是分区淡彩平涂：皮肤用参考图里的自然肤色，头发和衣服各用自己的颜色，不要一种颜色盖满全图。默认表情是放松的微笑。背景留白。不是写实照片，也不是 Q 版大头。
 
-角度由这次出图来定，不要问用户。看参考图哪一侧脸更清楚（头发没挡住、眼镜没反光、五官完整），头就微微转向那一侧，大约 25 度，眼睛看回镜头，朝向的一侧留白。两边差不多时用 `turn-left`。不要正面证件照，也不要全侧脸。
+角度由这次出图来定，不要问用户。看参考图哪一侧脸更清楚（头发没挡住、眼镜没反光、五官完整），让那半边脸朝向镜头：头转向**另一侧**，眼睛看回镜头，头朝向的一侧留白。不要正面证件照，也不要全侧脸。
+
+| 参考图情况 | `--angle` |
+| --- | --- |
+| 两侧差不多清楚 | `turn-left` |
+| 画面左侧略清楚 | `turn-right` |
+| 画面右侧略清楚 | `turn-left` |
+| 画面左侧明显更好，右侧被挡、糊掉或反光 | `three-quarter-right` |
+| 画面右侧明显更好，左侧被挡、糊掉或反光 | `three-quarter-left` |
 
 长相以用户上传的参考图为准。没有参考图就停下来，请用户上传一张正面、光线清楚的本人照片，不要编造五官，也不要生图。
 
@@ -24,15 +32,16 @@ description: >-
 4. 在本 skill 目录执行。不需要安装 npm 包，本机 Node 直接跑 TypeScript。
 
 ```bash
-node src/cli.ts --reference "<参考图绝对路径>" --angle "<turn-left 或 turn-right>" --notes "<英文短句，可省略>"
+node src/cli.ts --reference "<参考图绝对路径>" --angle "<turn-left、turn-right、three-quarter-left 或 three-quarter-right>" --notes "<英文短句，可省略>"
 ```
 
-画面左侧更清楚用 `turn-left`，画面右侧更清楚用 `turn-right`。用户指定了表情时再加 `--expression "<眼睛和嘴的英文短句>"`。
+角度按上面的表选。用户指定了表情时再加 `--expression "<眼睛和嘴的英文短句>"`。
 
 5. 脚本失败时，把 stderr 里的原话告诉用户，不要生图。
 6. 脚本成功后，用当前 agent 的生图能力出图。方案原样传入，不要改写：
    - 提示词用 `prompt`
    - 画幅用 `imageRequest.aspectRatio`（1:1）
+   - 负面提示用 `imageRequest.negativePrompt`。生图工具没有负面提示参数时，在 `prompt` 末尾接上 `, avoid: ` 和它的内容
    - 参考图用 `imageRequest.referenceImagePaths`
 7. 回复里说明这是线稿插画头像，脸来自参考图，并说明头转向哪一侧。不要把图片再贴成 Markdown。
 
@@ -49,7 +58,7 @@ node src/cli.ts --reference "<参考图绝对路径>" --angle "<turn-left 或 tu
 | `src/cli.ts` | 命令入口。核对参考图，把方案 JSON 打到标准输出 |
 | `src/parse-args.ts` | 读取 `--reference`、`--angle`、`--notes`、`--expression` |
 | `src/read-reference-image.ts` | 确认参考图已上传，并核对 JPEG、PNG、WebP |
-| `src/portrait-angle.ts` | 两种微侧角度，以及朝向那一侧的留白 |
+| `src/portrait-angle.ts` | 四种角度（微侧、三分之四侧），以及朝向那一侧的留白 |
 | `src/line-illustration.ts` | 线稿插画的固定线条和上色 |
 | `src/build-avatar-plan.ts` | 把参考图、角度和风格合成生图方案 |
 | `src/types.ts` | 请求、参考图、方案的类型 |

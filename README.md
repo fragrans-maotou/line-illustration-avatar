@@ -1,6 +1,6 @@
 # 线稿插画头像
 
-上传一张参考图，生成正方形线稿头像：黑线勾轮廓，线有粗细，只上一层淡彩，背景留白。头微微转向更清楚的一侧，眼睛看回镜头。
+上传一张参考图，生成正方形线稿头像：黑线勾轮廓，线有粗细，分区淡彩平涂、肤色自然，背景留白。头微微转向更清楚的一侧，眼睛看回镜头。
 
 人看这份说明。Agent 按 [SKILL.md](SKILL.md) 执行。
 
@@ -15,9 +15,9 @@
 ## 一次出图
 
 1. 用户给出参考图。没有参考图就停下来，请用户上传。
-2. 看哪一侧脸更清楚，选定 `turn-left` 或 `turn-right`。两边差不多时用 `turn-left`。
+2. 看哪一侧脸更清楚，让那半边朝向镜头：头转向另一侧。略清楚用 `turn-left` / `turn-right`，另一侧明显不能用时用 `three-quarter-left` / `three-quarter-right`。两边差不多时用 `turn-left`。
 3. 在这个目录运行下面的命令。脚本核对图片，并打印一份 JSON。
-4. Agent 用自己的生图能力出图。提示词用 JSON 里的 `prompt`，画幅用 `imageRequest.aspectRatio`，参考图用 `imageRequest.referenceImagePaths`。这三项不要改写。
+4. Agent 用自己的生图能力出图。提示词用 JSON 里的 `prompt`，画幅用 `imageRequest.aspectRatio`，负面提示用 `imageRequest.negativePrompt`，参考图用 `imageRequest.referenceImagePaths`。这几项不要改写。
 
 ```bash
 node src/cli.ts --reference "<参考图绝对路径>" --angle turn-left
@@ -35,7 +35,7 @@ examples/pig/after.png           小猪线稿头像
 src/cli.ts                       命令入口，从这里读代码
 src/parse-args.ts                读取命令参数
 src/read-reference-image.ts      确认参考图存在，并核对格式
-src/portrait-angle.ts            两种微侧角度
+src/portrait-angle.ts            四种角度
 src/line-illustration.ts         固定的线条和上色
 src/build-avatar-plan.ts         把参考图和构图合成方案
 src/types.ts                     请求、参考图、方案的类型

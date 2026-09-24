@@ -46,6 +46,8 @@ export type AvatarPlan = {
   prompt: string;
   imageRequest: {
     aspectRatio: "1:1";
+    /** 生图工具支持负面提示时原样传入；不支持时并进提示词末尾，前缀 "avoid: "。 */
+    negativePrompt: string;
     referenceImagePaths: [string];
   };
 };

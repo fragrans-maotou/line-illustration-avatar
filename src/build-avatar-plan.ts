@@ -32,6 +32,7 @@ export function buildAvatarPlan(input: {
     prompt,
     imageRequest: {
       aspectRatio: lineIllustration.aspectRatio,
+      negativePrompt: lineIllustration.avoid.join(", "),
       referenceImagePaths: [input.referenceImage.path],
     },
   };
