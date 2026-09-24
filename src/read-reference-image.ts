@@ -3,8 +3,8 @@
 import { open, stat } from "node:fs/promises";
 import path from "node:path";
 
-import { AvatarInputError } from "./input-error.js";
-import type { ReferenceImage, ReferenceImageFormat } from "./types.js";
+import { AvatarInputError } from "./input-error.ts";
+import type { ReferenceImage, ReferenceImageFormat } from "./types.ts";
 
 const MAX_BYTES = 15 * 1024 * 1024;
 

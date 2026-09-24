@@ -1,6 +1,6 @@
 /** 头像只允许两种微侧角度，不包含正面居中。 */
 
-import { AvatarInputError } from "./input-error.js";
+import { AvatarInputError } from "./input-error.ts";
 
 export const portraitAngleIds = ["turn-left", "turn-right"] as const;
 

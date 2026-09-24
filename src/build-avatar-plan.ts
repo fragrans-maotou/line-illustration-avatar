@@ -1,9 +1,9 @@
 /** 用参考图和线稿插画构图，合成一条可直接生图的方案。 */
 
-import { lineIllustration } from "./line-illustration.js";
-import { defaultPortraitAngle, portraitAngles } from "./portrait-angle.js";
-import type { PortraitAngleId } from "./portrait-angle.js";
-import type { AvatarPlan, ReferenceImage } from "./types.js";
+import { lineIllustration } from "./line-illustration.ts";
+import { defaultPortraitAngle, portraitAngles } from "./portrait-angle.ts";
+import type { PortraitAngleId } from "./portrait-angle.ts";
+import type { AvatarPlan, ReferenceImage } from "./types.ts";
 
 export function buildAvatarPlan(input: {
   referenceImage: ReferenceImage;

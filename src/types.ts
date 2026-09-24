@@ -1,6 +1,6 @@
 /** 这份 skill 里流转的数据结构。 */
 
-import type { PortraitAngleId } from "./portrait-angle.js";
+import type { PortraitAngleId } from "./portrait-angle.ts";
 
 /** 用户上传的参考图。长相以这张图为准。 */
 export type ReferenceImage = {

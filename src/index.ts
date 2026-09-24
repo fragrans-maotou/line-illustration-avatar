@@ -1,16 +1,16 @@
 /** 对外导出的能力：读参考图，拼出线稿插画头像方案。 */
 
-export { buildAvatarPlan } from "./build-avatar-plan.js";
-export { lineIllustration } from "./line-illustration.js";
-export { defaultPortraitAngle, portraitAngles } from "./portrait-angle.js";
-export type { PortraitAngleId } from "./portrait-angle.js";
-export { AvatarInputError } from "./input-error.js";
-export { parseArgs } from "./parse-args.js";
-export { readReferenceImage } from "./read-reference-image.js";
+export { buildAvatarPlan } from "./build-avatar-plan.ts";
+export { lineIllustration } from "./line-illustration.ts";
+export { defaultPortraitAngle, portraitAngles } from "./portrait-angle.ts";
+export type { PortraitAngleId } from "./portrait-angle.ts";
+export { AvatarInputError } from "./input-error.ts";
+export { parseArgs } from "./parse-args.ts";
+export { readReferenceImage } from "./read-reference-image.ts";
 export type {
   AvatarPlan,
   AvatarRequest,
   LineIllustration,
   ReferenceImage,
   ReferenceImageFormat,
-} from "./types.js";
+} from "./types.ts";

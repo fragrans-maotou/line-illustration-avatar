@@ -1,8 +1,8 @@
 /** 从命令行读取 --reference、--notes、--expression、--angle。 */
 
-import { AvatarInputError } from "./input-error.js";
-import { parsePortraitAngle } from "./portrait-angle.js";
-import type { AvatarRequest } from "./types.js";
+import { AvatarInputError } from "./input-error.ts";
+import { parsePortraitAngle } from "./portrait-angle.ts";
+import type { AvatarRequest } from "./types.ts";
 
 const MISSING_REFERENCE =
   "缺少参考图。请上传一张正面、光线清楚的本人照片，再生成头像。";

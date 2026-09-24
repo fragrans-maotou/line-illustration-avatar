@@ -21,10 +21,10 @@ description: >-
 1. 找到用户这次附上的照片路径。没附照片就请用户上传，到此为止。
 2. 看参考图选定角度，写入 `--angle`。不要问用户选哪边。
 3. 人物补充只记录用户明确说过的内容（衣服、发型），译成英文短句。没说就不要加 `--notes`，也不要编脸。
-4. 在本 skill 目录执行。若还没有 `node_modules`，先运行 `npm install`。
+4. 在本 skill 目录执行。不需要安装 npm 包，本机 Node 直接跑 TypeScript。
 
 ```bash
-npm run plan -- --reference "<参考图绝对路径>" --angle "<turn-left 或 turn-right>" --notes "<英文短句，可省略>"
+node src/cli.ts --reference "<参考图绝对路径>" --angle "<turn-left 或 turn-right>" --notes "<英文短句，可省略>"
 ```
 
 画面左侧更清楚用 `turn-left`，画面右侧更清楚用 `turn-right`。用户指定了表情时再加 `--expression "<眼睛和嘴的英文短句>"`。
@@ -42,14 +42,16 @@ npm run plan -- --reference "<参考图绝对路径>" --angle "<turn-left 或 tu
 
 ## 代码
 
+从 `src/cli.ts` 读起，顺着一次出图往下看。
+
 | 文件 | 做什么 |
 | --- | --- |
-| `src/cli.ts` | 命令入口，打印方案 JSON |
-| `src/index.ts` | 对外导出的能力 |
+| `src/cli.ts` | 命令入口。核对参考图，把方案 JSON 打到标准输出 |
 | `src/parse-args.ts` | 读取 `--reference`、`--angle`、`--notes`、`--expression` |
-| `src/read-reference-image.ts` | 确认参考图已上传，并核对格式 |
-| `src/portrait-angle.ts` | 两种微侧角度，以及各自的留白 |
+| `src/read-reference-image.ts` | 确认参考图已上传，并核对 JPEG、PNG、WebP |
+| `src/portrait-angle.ts` | 两种微侧角度，以及朝向那一侧的留白 |
 | `src/line-illustration.ts` | 线稿插画的固定线条和上色 |
-| `src/build-avatar-plan.ts` | 把参考图和构图合成生图方案 |
+| `src/build-avatar-plan.ts` | 把参考图、角度和风格合成生图方案 |
 | `src/types.ts` | 请求、参考图、方案的类型 |
-| `src/input-error.ts` | 参考图缺失或不合格时的错误 |
+| `src/input-error.ts` | 参考图缺失或不合格。把 message 原样告诉用户 |
+| `src/index.ts` | 把上面的能力导出给命令入口 |

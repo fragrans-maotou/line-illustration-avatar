@@ -5,7 +5,7 @@ import {
   buildAvatarPlan,
   parseArgs,
   readReferenceImage,
-} from "./index.js";
+} from "./index.ts";
 
 async function main(): Promise<void> {
   try {

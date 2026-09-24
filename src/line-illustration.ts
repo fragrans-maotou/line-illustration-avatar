@@ -1,6 +1,6 @@
 /** 干净线稿插画：黑线勾轮廓，线有粗细，只上一层淡彩，白底。 */
 
-import type { LineIllustration } from "./types.js";
+import type { LineIllustration } from "./types.ts";
 
 export const lineIllustration: LineIllustration = {
   name: "line-illustration",
