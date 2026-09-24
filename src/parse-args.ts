@@ -1,15 +1,20 @@
-/** 从命令行读取 --reference、--notes、--expression、--angle。 */
+/** 从命令行读取 --reference、--subject、--notes、--expression、--angle。 */
 
 import { AvatarInputError } from "./input-error.ts";
 import { parsePortraitAngle } from "./portrait-angle.ts";
+import { parseSubject, subjectIds } from "./subject.ts";
 import type { AvatarRequest } from "./types.ts";
 
 const MISSING_REFERENCE =
-  "缺少参考图。请上传一张正面、光线清楚的本人照片，再生成头像。";
+  "缺少参考图。请上传一张正面、光线清楚的照片，再生成头像。";
+
+const MISSING_SUBJECT =
+  `缺少 --subject。看参考图判定主体：${subjectIds.join("、")}。`;
 
 export function parseArgs(argv: readonly string[]): AvatarRequest {
   let referenceImagePath: string | undefined;
-  let personNotes: string | undefined;
+  let subject: AvatarRequest["subject"] | undefined;
+  let notes: string | undefined;
   let expression: string | undefined;
   let angle: AvatarRequest["angle"];
 
@@ -24,8 +29,12 @@ export function parseArgs(argv: readonly string[]): AvatarRequest {
         referenceImagePath = readFlagValue(argv, index, "参考图路径");
         index += 1;
         break;
+      case "--subject":
+        subject = parseSubject(readFlagValue(argv, index, "主体"));
+        index += 1;
+        break;
       case "--notes":
-        personNotes = readFlagValue(argv, index, "人物补充");
+        notes = readFlagValue(argv, index, "补充描述");
         index += 1;
         break;
       case "--expression":
@@ -45,12 +54,15 @@ export function parseArgs(argv: readonly string[]): AvatarRequest {
   if (!reference) {
     throw new AvatarInputError(MISSING_REFERENCE);
   }
+  if (!subject) {
+    throw new AvatarInputError(MISSING_SUBJECT);
+  }
 
-  const request: AvatarRequest = { referenceImagePath: reference };
-  const notes = personNotes?.trim();
+  const request: AvatarRequest = { referenceImagePath: reference, subject };
+  const trimmedNotes = notes?.trim();
   const mood = expression?.trim();
-  if (notes) {
-    request.personNotes = notes;
+  if (trimmedNotes) {
+    request.notes = trimmedNotes;
   }
   if (mood) {
     request.expression = mood;

@@ -1,4 +1,4 @@
-/** 干净线稿插画：黑线勾轮廓，线有粗细，分区淡彩平涂，肤色自然，白底。 */
+/** 干净线稿插画：黑线勾轮廓，线有粗细，分区淡彩平涂，白底。不含任何主体专属的描述。 */
 
 import type { LineIllustration } from "./types.ts";
 
@@ -7,18 +7,15 @@ export const lineIllustration: LineIllustration = {
   aspectRatio: "1:1",
   width: 1024,
   height: 1024,
-  crop: "head-and-shoulders",
-  headroom: "10-15% above the hair",
+  crop: "head-and-upper-body",
+  headroom: "10-15% above the head",
   safeZone: "eyes and mouth stay readable; leave open white space on the side the face turns toward",
-  defaultExpression: "looking at the camera, relaxed friendly smile",
   styleSuffix: [
-    "square head-and-shoulders crop",
+    "square head-and-upper-body crop",
     "black contour lines with varied weight",
     "thicker outer silhouette",
-    "thinner interior lines for facial features, hair, and clothing",
+    "thinner interior lines for facial features and details",
     "flat muted color fills kept separate by area",
-    "natural warm skin tone matching the reference photo on face, neck, and hands",
-    "hair and clothing keep their own colors from the reference photo",
     "limited soft palette",
     "not a photograph",
     "generous blank white background",
@@ -26,10 +23,8 @@ export const lineIllustration: LineIllustration = {
   ].join(", "),
   avoid: [
     "photograph",
-    "photorealistic skin",
+    "photorealistic texture",
     "studio lighting",
-    "chibi",
-    "oversized head",
     "3d render",
     "anime sparkle eyes",
     "text",
@@ -37,13 +32,10 @@ export const lineIllustration: LineIllustration = {
     "scenery",
     "gradient shading",
     "crosshatching",
-    "second person",
+    "second subject",
     "straight-on passport crop",
     "face pinned to the center",
     "full profile",
     "single color wash over everything",
-    "clothing color on skin",
-    "green or grey skin",
-    "stiff expression",
   ],
 };

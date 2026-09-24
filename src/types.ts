@@ -1,6 +1,7 @@
 /** 这份 skill 里流转的数据结构。 */
 
 import type { PortraitAngleId } from "./portrait-angle.ts";
+import type { SubjectId } from "./subject.ts";
 
 /** 用户上传的参考图。长相以这张图为准。 */
 export type ReferenceImage = {
@@ -11,11 +12,13 @@ export type ReferenceImage = {
 
 export type ReferenceImageFormat = "jpeg" | "png" | "webp";
 
-/** 命令行读到的本次请求。参考图路径必填。 */
+/** 命令行读到的本次请求。参考图路径和主体必填。 */
 export type AvatarRequest = {
   referenceImagePath: string;
+  /** 看参考图后判定的主体：真人、动物，还是玩偶或卡通形象。 */
+  subject: SubjectId;
   /** 用户明确说过的补充，英文短句。不描述五官。 */
-  personNotes?: string;
+  notes?: string;
   /** 覆盖默认表情的英文短句。 */
   expression?: string;
   /** 看参考图后选定的微侧方向。 */
@@ -28,10 +31,9 @@ export type LineIllustration = {
   aspectRatio: "1:1";
   width: 1024;
   height: 1024;
-  crop: "head-and-shoulders";
-  headroom: "10-15% above the hair";
+  crop: "head-and-upper-body";
+  headroom: "10-15% above the head";
   safeZone: "eyes and mouth stay readable; leave open white space on the side the face turns toward";
-  defaultExpression: string;
   styleSuffix: string;
   avoid: readonly string[];
 };
@@ -40,8 +42,9 @@ export type LineIllustration = {
 export type AvatarPlan = {
   referenceImage: ReferenceImage;
   illustration: LineIllustration;
+  subject: SubjectId;
   angle: PortraitAngleId;
-  personNotes?: string;
+  notes?: string;
   expression: string;
   prompt: string;
   imageRequest: {

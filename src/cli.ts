@@ -13,7 +13,8 @@ async function main(): Promise<void> {
     const referenceImage = await readReferenceImage(request.referenceImagePath);
     const plan = buildAvatarPlan({
       referenceImage,
-      personNotes: request.personNotes,
+      subject: request.subject,
+      notes: request.notes,
       expression: request.expression,
       angle: request.angle,
     });
