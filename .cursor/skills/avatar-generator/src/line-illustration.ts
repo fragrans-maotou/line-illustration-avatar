@@ -1,0 +1,42 @@
+/** 干净线稿插画：黑线勾轮廓，线有粗细，只上一层淡彩，白底。 */
+
+import type { LineIllustration } from "./types.js";
+
+export const lineIllustration: LineIllustration = {
+  name: "line-illustration",
+  aspectRatio: "1:1",
+  width: 1024,
+  height: 1024,
+  crop: "head-and-shoulders",
+  headroom: "10-15% above the hair",
+  safeZone: "eyes and mouth stay readable; leave open white space on the side the face turns toward",
+  defaultExpression: "looking at the camera, calm closed mouth",
+  styleSuffix: [
+    "square head-and-shoulders crop",
+    "black contour lines with varied weight",
+    "thicker outer silhouette",
+    "thinner interior lines for facial features, hair, and clothing",
+    "one single flat muted color wash over the ink",
+    "not a photograph",
+    "generous blank white background",
+    "no scenery",
+  ].join(", "),
+  avoid: [
+    "photograph",
+    "photorealistic skin",
+    "studio lighting",
+    "chibi",
+    "oversized head",
+    "3d render",
+    "anime sparkle eyes",
+    "text",
+    "watermark",
+    "scenery",
+    "gradient shading",
+    "crosshatching",
+    "second person",
+    "straight-on passport crop",
+    "face pinned to the center",
+    "full profile",
+  ],
+};
