@@ -2,7 +2,7 @@
 
 上传一张参考图，生成正方形干净线稿头像：黑线勾轮廓，线有粗细，只上一层淡彩，背景留白。头微微侧向更清楚的一侧，不做成正面证件照。
 
-Skill 在 [`.cursor/skills/avatar-generator`](.cursor/skills/avatar-generator/SKILL.md)。
+这个目录就是 skill。任何 agent 都读根目录的 [SKILL.md](SKILL.md)，不放进某一个编辑器的私有目录。
 
 ## 小猪
 
@@ -10,11 +10,11 @@ Skill 在 [`.cursor/skills/avatar-generator`](.cursor/skills/avatar-generator/SK
 
 | 参考图 | 生成的头像 |
 | --- | --- |
-| ![小猪参考图](.cursor/skills/avatar-generator/examples/pig/before.png) | ![小猪线稿头像](.cursor/skills/avatar-generator/examples/pig/after.png) |
+| ![小猪参考图](examples/pig/before.png) | ![小猪线稿头像](examples/pig/after.png) |
 
 ## 使用
 
-在 skill 目录执行。第一次先 `npm install`。
+在这个目录执行。第一次先 `npm install`。
 
 ```bash
 npm run plan -- --reference "<参考图绝对路径>" --angle "<turn-left 或 turn-right>"

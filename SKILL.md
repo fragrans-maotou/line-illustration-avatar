@@ -30,10 +30,10 @@ npm run plan -- --reference "<参考图绝对路径>" --angle "<turn-left 或 tu
 画面左侧更清楚用 `turn-left`，画面右侧更清楚用 `turn-right`。用户指定了表情时再加 `--expression "<眼睛和嘴的英文短句>"`。
 
 5. 脚本失败时，把 stderr 里的原话告诉用户，不要生图。
-6. 脚本成功后，调用 `GenerateImage`：
-   - `description` 用方案里的 `prompt`，不要改写
-   - `aspect_ratio` 用 `imageRequest.aspectRatio`
-   - `reference_image_paths` 用 `imageRequest.referenceImagePaths`
+6. 脚本成功后，用当前 agent 的生图能力出图。方案原样传入，不要改写：
+   - 提示词用 `prompt`
+   - 画幅用 `imageRequest.aspectRatio`（1:1）
+   - 参考图用 `imageRequest.referenceImagePaths`
 7. 回复里说明这是线稿插画头像，脸来自参考图，并说明头转向哪一侧。不要把图片再贴成 Markdown。
 
 ## 示例
